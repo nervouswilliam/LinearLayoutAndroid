@@ -3,6 +3,7 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     EditText editPhone;
     EditText editEmail;
     EditText editAddress;
-    Button btnSave;
+    Button btnSave, viewBtn;
 
     DatabaseHelper db;
     @Override
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnSave = findViewById(R.id.btnSave);
 
-        DatabaseHelper db = new DatabaseHelper(this);
+        db = new DatabaseHelper(this);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
                 boolean isInsert = db.isInsertMahasiswa(nim, name, phone, email, address);
 
                 if(isInsert){
-                    getData();
-//                    Toast.makeText(this, "Data berhasil disimpan", Toast.LENGTH_LONG).show();
+                   Intent intent = new Intent(MainActivity.this, StudentActivity.class);
+                   startActivity(intent);
                 }else{
                     Toast.makeText(MainActivity.this, "Data gagal disimpan", Toast.LENGTH_LONG).show();
 
@@ -55,26 +56,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-    private void getData(){
-        Cursor cursor = db.getMahasiswa();
-        if(cursor.getCount() <= 0){
-            Toast.makeText(MainActivity.this, "Tabel Kosong", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        StringBuffer buffer = new StringBuffer();
-        while(cursor.moveToNext()){
-            buffer.append("Nim: " + cursor.getString(0) + "\n");
-            buffer.append("Name: " + cursor.getString(1)+ "\n");
-            buffer.append("Phone: " + cursor.getString(2)+ "\n");
-            buffer.append("Email: " + cursor.getString(3)+ "\n");
-            buffer.append("Address: " + cursor.getString(4) + "\n");
-        }
-        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-        alert.setCancelable(true);
-        alert.setTitle("Data Mahasiswa");
-        alert.setMessage(buffer);
-        alert.show();
+        viewBtn = findViewById(R.id.viewBtn);
+        viewBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, StudentActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
