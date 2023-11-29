@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 String email = editEmail.getText().toString();
                 String address = editAddress.getText().toString();
 
-                boolean isInsert = db.isInsertMahasiswa(nim, name, phone, email, address);
+                boolean isInsert = db.isInsertMhs(nim, name, phone, email, address);
 
                 if(isInsert){
                    Intent intent = new Intent(MainActivity.this, StudentActivity.class);
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewBtn = findViewById(R.id.viewBtn);
         viewBtn.setOnClickListener(new View.OnClickListener(){
+
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, StudentActivity.class);

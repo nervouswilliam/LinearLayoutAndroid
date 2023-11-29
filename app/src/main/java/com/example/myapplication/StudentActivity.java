@@ -21,7 +21,7 @@ public class StudentActivity extends AppCompatActivity {
     DatabaseHelper db;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_list);
         db = new DatabaseHelper(this);

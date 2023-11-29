@@ -16,12 +16,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("Create table student("+
-                "nim text primary key," +
-                "name TEXT," +
-                "phone TEXT," +
-                "email TEXT," +
-                "address TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE student("+
+                "nim text PRIMARY KEY," +
+                "name text," +
+                "phone text," +
+                "email text," +
+                "address text)");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean isInsertMahasiswa(String nim, String name, String phone, String email, String address){
+    public boolean isInsertMhs(String nim, String name, String phone, String email, String address){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues content = new ContentValues();
         content.put("nim", nim);
@@ -41,13 +41,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result = db.insert("student", null, content);
         if(result == -1){
             return false;
-        }else{
-            return true;
         }
+        return true;
     }
     public Cursor getMahasiswa(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("Select * from student", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM student", null);
         return cursor;
     }
 
