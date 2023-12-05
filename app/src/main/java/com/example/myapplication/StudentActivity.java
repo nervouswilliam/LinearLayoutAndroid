@@ -31,6 +31,8 @@ public class StudentActivity extends AppCompatActivity {
         ArrayList<Student> arr = new ArrayList<>();
         Student student;
 
+
+
         while(cursor.moveToNext()){
             String nim = cursor.getString(0);
             String name = cursor.getString(1);
