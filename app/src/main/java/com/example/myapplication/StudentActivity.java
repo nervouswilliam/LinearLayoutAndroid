@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -50,6 +51,21 @@ public class StudentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StudentActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Student currStudent = arr.get(i);
+                Intent intent = new Intent(StudentActivity.this, DetailActivity.class);
+
+                intent.putExtra("nim", currStudent.getNim());
+                intent.putExtra("name", currStudent.getNim());
+                intent.putExtra("phone", currStudent.getPhone());
+                intent.putExtra("email", currStudent.getEmail());
+                intent.putExtra("address", currStudent.getAddress());
                 startActivity(intent);
             }
         });

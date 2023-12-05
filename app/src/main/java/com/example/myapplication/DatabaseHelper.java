@@ -50,16 +50,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public boolean updateData(String nim, String nama, String email, String address, String phone){
+    public boolean updateData(String nim, String name, String phone, String address, String email){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put("name", nama);
+        contentValues.put("nim", nim);
+        contentValues.put("name", name);
+        contentValues.put("phone", phone);
         contentValues.put("email", email);
         contentValues.put("address", address);
-        contentValues.put("phone", phone);
 
-        Cursor cursor = db.rawQuery("Select * from mahasiswa where nim = ?",
+
+        Cursor cursor = db.rawQuery("Select * from student where nim = ?",
                 new String[]{nim});
         if(cursor.getCount() > 0){
             long result = db.update("student", contentValues,
@@ -76,16 +78,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean deleteData(String nim){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("Select * from mahasiswa where nim = ?",
+        Cursor cursor = db.rawQuery("Select * from student where nim = ?",
                 new String[]{nim});
         if(cursor.getCount() > 0){
-            long result = db.delete("mahasiswa", "nim = ?",
+            long result = db.delete("student", "nim = ?",
                     new String[] {nim});
 
-            if(result <= 0)
-                return false;
-            else
-                return true;
+            return result > 0;
         }
         return false;
     }
